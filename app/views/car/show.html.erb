@@ -1,0 +1,7 @@
+show
+<%= @car.name %>
+
+<%= form_tag(car_path(@car.id), method: "delete") do %>
+
+  <%= submit_tag("Delete") %>
+<% end %>

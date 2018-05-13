@@ -1,0 +1,5 @@
+<%= form_tag(user_path(@user.id), method: "patch") do %>
+  <%= label_tag(:name, "Search for:") %>
+  <%= text_field_tag(:name, @user.name) %>
+  <%= submit_tag("Save") %>
+<% end %>

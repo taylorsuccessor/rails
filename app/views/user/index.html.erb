@@ -1,0 +1,18 @@
+<h1>this is user index page</h1>
+<% @userList.each do |user| %>
+
+<a href="<%= edit_user_path(user.id) %>" >
+
+<%=  user.name %>
+<%=  user.car.name %>
+
+<%  user.car.each do |car| %>
+<%= car.name %>
+<% end %>
+
+</a>
+<% end %>
+
+<% content_for :title do %>
+  <title>A simple page</title>
+<% end %>

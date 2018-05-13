@@ -1,0 +1,13 @@
+<h1>this is car index page</h1>
+<% @carList.each do |car| %>
+<%= car.user_text %><br>
+<a href="<%= edit_car_path(car.id) %>" >
+
+<%= car.name %>
+
+</a>
+<% end %>
+
+<% content_for :title do %>
+  <title>A simple page</title>
+<% end %>

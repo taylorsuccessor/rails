@@ -1,0 +1,5 @@
+<%= form_tag(car_path(@car.id), method: "patch") do %>
+  <%= label_tag(:name, "Search for:") %>
+  <%= text_field_tag(:name, @car.name) %>
+  <%= submit_tag("Save") %>
+<% end %>
