@@ -1,7 +1,134 @@
-show
-<%= @user.name %>
 
-<%= form_tag(user_path(@user.id), method: "delete") do %>
 
-  <%= submit_tag("Delete") %>
+
+
+
+<% content_for :title do %>
+ <%= t :show %>
 <% end %>
+
+
+
+
+
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <!-- .row -->
+            <div class="row bg-title" style="background:url(/images/top_banner.jpg) no-repeat center center /cover;">
+                <div class="col-lg-12">
+                    <h4 class="page-title"><%= t :show %></h4>
+                </div>
+                <div class="col-sm-6 col-md-6 col-xs-12">
+                    <ol class="breadcrumb pull-left">
+                        <li><a href="#"><%= t :show %></a></li>
+                        <li class="active"><%= t :show %></li>
+                    </ol>
+                </div>
+                <div class="col-sm-6 col-md-6 col-xs-12">
+                    <form role="search" method="get" action="" class="app-search hidden-xs pull-right">
+                        <input type="text" placeholder=" {{ trans('general.search') }} ..." class="form-control">
+                        <a href="javascript:void(0)"><i class="fa fa-search"></i></a>
+                    </form>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="row">
+
+
+                <div class="col-xs-12">
+                    <div class="white-box">
+                        <h3 class="box-title m-b-0"><%= t :show %></h3>
+                        <p class="text-muted m-b-40"><%= t :show %></p>
+                        <!-- Nav tabs -->
+
+
+                        <ul class="nav nav-tabs" role="tablist">
+
+
+                            <li role="presentation" class="active">
+                                <a href="#idetail" aria-controls="detail" role="tab" data-toggle="tab" aria-expanded="true"><span><i class="ti-home"></i><%= t :basic %></span></a>
+                            </li>
+
+
+
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+
+
+                            <div role="tabpanel" class="tab-pane active" id="idetail">
+
+
+
+
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <span class="panel-title"><%= t :show %></span>
+                                    </div>
+
+                                    <div class="panel-body">
+
+
+
+
+                                        <div class="row">
+                                        
+
+
+                                        <div class="col-sm-2 text-right">
+                                                <div class="form-group no-margin-hr">
+                                                    <label class="control-label"><%= t :name %> </label>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-sm-4 text-left">
+                                                <div class="form-group no-margin-hr">
+                                                    <label class="control-label">
+                                                    <%= @user.name %>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+        </div>
+    </div>

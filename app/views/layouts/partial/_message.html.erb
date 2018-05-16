@@ -1,0 +1,7 @@
+<% if @car && @car.errors.any?
+  @car.errors.each do |attribute, message|  %>
+<%= attribute %>
+<%=message %>
+<% end
+   end %>
+

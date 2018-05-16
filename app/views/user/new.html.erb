@@ -1,23 +1,134 @@
-<%= form_tag("/user", method: "post") do %>
-  <%= label_tag(:name, "Search for:") %>
-  <%= text_field_tag(:name) %>
-  <%= submit_tag("Save") %>
+
+
+
+<% content_for :title do %>
+ <%= t :create %>
 <% end %>
 
 
-<%
-if @user && @user.errors.has_key?(:name)
-%>
-<%=@user.errors[:name].first() %>
-<% end %>
 
-<%
-if @user && @user.errors.any?
-  @user.errors.each do |attribute, message|
-%>
-<%= attribute %>
-<%=message %>
-<%
-  end
-  end
-  %>
+
+
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <!-- .row -->
+            <div class="row bg-title" style="background:url(/images/top_banner.jpg) no-repeat center center /cover;">
+                <div class="col-lg-12">
+                    <h4 class="page-title"><%= t :create %></h4>
+                </div>
+                <div class="col-sm-6 col-md-6 col-xs-12">
+                    <ol class="breadcrumb pull-left">
+                        <li><a href="#"><%= t :create %></a></li>
+                        <li class="active"><%= t :create %></li>
+                    </ol>
+                </div>
+                <div class="col-sm-6 col-md-6 col-xs-12">
+                    <form role="search" method="get" action="" class="app-search hidden-xs pull-right">
+                        <input type="text" placeholder=" {{ trans('general.search') }} ..." class="form-control">
+                        <a href="javascript:void(0)"><i class="fa fa-search"></i></a>
+                    </form>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="row">
+
+
+                <div class="col-xs-12">
+                    <div class="white-box">
+                        <h3 class="box-title m-b-0"><%= t :create %></h3>
+                        <p class="text-muted m-b-40"><%= t :create %></p>
+                        <!-- Nav tabs -->
+
+
+                        <ul class="nav nav-tabs" role="tablist">
+
+
+                            <li role="presentation" class="active">
+                                <a href="#idetail" aria-controls="detail" role="tab" data-toggle="tab" aria-expanded="true"><span><i class="ti-home"></i><%= t :basic %></span></a>
+                            </li>
+
+
+
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+
+
+                            <div role="tabpanel" class="tab-pane active" id="idetail">
+
+<%= form_tag( "/user", method: "post",class: "form-horizontal") do %>
+
+
+
+
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <span class="panel-title"><%= t :create %></span>
+                                    </div>
+
+                                    <div class="panel-body">
+
+
+
+
+                                        <div class="row">
+                                        <div class="form-group <%  if @user && @user.errors.has_key?(:name) %> has-error <% end %>  col-xs-6">
+
+                                            <%= label_tag(:name,"name",class: "col-sm-4 control-label") %>
+                                            <div class="col-sm-8">
+
+                                              <%= text_field_tag(:name ,"",class: 'form-control') %>
+
+                                              <%  if @user && @user.errors.has_key?(:name) %><p class="help-block"><%=@user.errors[:name].first() %></p><% end %>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-9 col-sm-3">
+                                            <input name="user_id" value="1" type="hidden">
+                                                <%= submit_tag("Save",class: 'btn btn-primary form-control') %>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                        <% end %>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+        </div>
+    </div>

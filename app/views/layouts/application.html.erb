@@ -1,15 +1,328 @@
+
+
+
+
+
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= yield :title %></title>
+<html lang="en">
+<head>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-  <body>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png">
+
+
+    <title><%= yield :title %></title>
+
+
+
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+
+</head>
+<body class="fix-sidebar rmv-right-panel content-wrprojecter">
+<!-- Preloader -->
+<div class="preloader" style="display: none !important;">
+    <div class="cssload-speeding-wheel"></div>
+</div>
+<div id="wrprojecter">
+
+
+
+
+
 <%= render "layouts/partial/header" %>
-    <%= yield %>
-  </body>
+<%= render "layouts/partial/menu" %>
+
+       <%= yield %>
+
+</div>
+
+
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+<script>
+    var options = {
+        format: "yyyy-mm-dd",
+        todayBtn: "linked",
+        orientation: $('body').hasClass('right-to-left') ? "auto right" : 'auto auto'
+    }
+
+    $('.mydatepicker, #datepicker').datepicker(options);
+    $('#datepicker-autoclose').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+    });
+
+    $('.myclockpicker, #clockpicker').clockpicker({
+        placement: 'bottom',
+        align: 'left',
+        autoclose: true,
+        'default': 'now'
+
+    });
+
+    $('#date-range').datepicker({
+        toggleActive: true
+    });
+    $('#datepicker-inline').datepicker({
+        todayHighlight: true
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    $('.clockpicker').clockpicker({
+        donetext: 'Done',
+
+    })
+            .find('input').change(function(){
+                console.log(this.value);
+            });
+
+
+
+
+    $('#all-groups-chx').change(function () {
+        if ($('#all-groups-chx').prop('checked')) {
+            $('#all-groups-slc').attr('disabled', 'disabled');
+        } else {
+            $('#all-groups-slc').removeAttr('disabled');
+        }
+    });
+
+    $('#all-symbols-chx').change(function () {
+        if ($('#all-symbols-chx').prop('checked')) {
+            $('#all-symbols-slc').attr('disabled', 'disabled');
+        } else {
+            $('#all-symbols-slc').removeAttr('disabled');
+        }
+    });
+
+    if ($('#all-groups-chx').prop('checked')) {
+        $('#all-groups-slc').attr('disabled', 'disabled');
+    } else {
+        $('#all-groups-slc').removeAttr('disabled');
+    }
+
+    if ($('#all-symbols-chx').prop('checked')) {
+        $('#all-symbols-slc').attr('disabled', 'disabled');
+    } else {
+        $('#all-symbols-slc').removeAttr('disabled');
+    }
+
+
+    $('#exactLogin').change(function () {
+        if ($('#exactLogin').prop('checked')) {
+            $("#from_login_li,#to_login_li").hide();
+            $("#login_li").show();
+        } else {
+            $("#from_login_li,#to_login_li").show();
+            $("#login_li").hide();
+        }
+    });
+
+    if ($('#exactLogin').prop('checked')) {
+        $("#from_login_li,#to_login_li").hide();
+        $("#login_li").show();
+    } else {
+        $("#from_login_li,#to_login_li").show();
+        $("#login_li").hide();
+    }
+    $(document).ready(function(){
+
+        if($('.right-side-panel').length == 0){
+            $('.right-side-toggle').hide();
+        }
+
+    });
+
+
+    function changeSelectedView(selectId,viewStartId,selectName){
+        var selectedValue=$('#'+selectId).val();
+        $('.'+viewStartId).hide();
+        $('#'+viewStartId+selectedValue).show();
+
+
+        $('.'+viewStartId+' select').attr('name','');
+        $('#'+viewStartId+selectedValue+' select').attr('name',selectName);
+
+    }
+
+$('.longHtmlContainer').click(function(){$(this).removeClass('longHtmlContainer');});
+
+
+
+    $('.deleteRow').click(function(){
+        if(!confirm('<%= t :deleteConfirmMessage %>')){
+            event.preventDefault();
+        }
+
+    });
+</script>
+
+<script>
+    //CKEDITOR.replace( textarea );
+    if($('#editor1').length){
+    CKEDITOR.replace('editor1', {
+        filebrowserBrowseUrl: " {{  route('common.files.browser') }}",
+        filebrowserUploadUrl: " {{ route('common.files.upload' ).'?_token='. csrf_token() }}"
+    });
+    }
+
+    if($('#editor2').length) {
+        CKEDITOR.replace('editor2', {
+            filebrowserBrowseUrl: "  {{route('common.files.browser') }}",
+            filebrowserUploadUrl: "{{ route('common.files.upload' ).'?_token='. csrf_token() }}"
+        });
+    }
+
+    if($('#editor3').length) {
+        CKEDITOR.replace('editor3', {
+            filebrowserBrowseUrl: "  {{route('common.files.browser') }}",
+            filebrowserUploadUrl: " {{route('common.files.upload' ).'?_token='. csrf_token() }}"
+        });
+    }
+</script>
+<script>
+    function openUploadWindow(targetInput){
+
+        window.open("{{route('common.files.fileInputPopup') }}?fileInputSelector="+targetInput, "Upload File", "width=1000,height=700");
+    }
+
+    $('.uploadFile').click(function(){
+        openUploadWindow($(this).attr('name'));
+    });
+
+
+
+</script>
+
+<script>
+    /*
+    $('.side-mini-panel').mouseout(function(){
+    $('body').attr('class','fix-sidebar content-wrprojecter content-wrapper rmv-right-panel');
+        $('.side-mini-panel .selected').removeClass('selected');
+$('#togglebtn').hide();
+    });
+    */
+
+</script>
+
+
+
+<script>
+
+function activeCurrentMenu(){
+
+var pageUrl=window.location.pathname;
+
+var pageUrlArray=pageUrl.split('/');
+
+var firstUrlPart='/'+pageUrlArray[1];
+var secondUrlPart='/'+pageUrlArray[1]+'/'+pageUrlArray[2];console.log(pageUrl,pageUrlArray,firstUrlPart,secondUrlPart);
+    var currentA=$('.sidebar-menu a.active');
+
+if(currentA.length == 0){
+currentA=$('.sidebar-menu a[href*="'+pageUrl+'"]').first();
+if(currentA.length == 0){
+currentA=$('.sidebar-menu a[href*="'+secondUrlPart+'"]').first();
+if(currentA.length == 0){
+currentA=$('.sidebar-menu a[href*="'+firstUrlPart+'"]').first();
+
+}
+}
+}
+currentA.addClass('active');
+    currentA.parent().parent().parent().parent().parent().addClass('selected');
+
+}
+    $(document).ready(function(){
+
+       activeCurrentMenu();
+        setTimeout('activeCurrentMenu()',1000);
+
+    });
+
+
+$('.mini-nav>li').mouseover(function(){
+$(this).click();
+});
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+    /*.right-side-panel{display: none;}*/
+    .longHtmlContainer{height:30px;overflow: hidden;}
+    .menu-search,.app-search {display:none;}
+
+</style>
+
+<% if I18n.locale == :ar %>
+    <style type="text/css">
+        .panel .panel-heading{}
+        .panel .panel-heading span{float:right;}
+        .panel .panel-body .form-group.col-xs-6{ }
+        .panel .panel-body .form-group.col-xs-6 .control-label{float:right;text-align:left;}
+        .panel .panel-body .form-group.col-xs-6 .col-sm-8{float:left;}
+        .panel .panel-body .form-group.col-xs-6{}
+
+    </style>
+  <% end %>
+</body>
 </html>

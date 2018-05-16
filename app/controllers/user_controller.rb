@@ -1,8 +1,19 @@
 class UserController < ApplicationController
 
- #layout "public", :only => [ :index, :show ]
+
+    before_action :set_locale
+
+    def set_locale
+       I18n.locale = params[:locale] || I18n.default_locale
+        # I18n.default_locale= :ar
+    end
+
+
+
+
+    #layout "public", :only => [ :index, :show ]
     def index
-     @userList=User.all
+     @oResults=User.all
     end
 
     def new
@@ -12,7 +23,7 @@ class UserController < ApplicationController
 
     def create
         @user = User.create(post_params)
-        print @user.valid?
+
           if @user.valid?
             redirect_to action: "index"
           else
@@ -33,8 +44,8 @@ class UserController < ApplicationController
 
     def update
 
-          user = User.find(params[:id])
-          if user.update_attributes(post_params)
+          @user = User.find(params[:id])
+          if @user.update_attributes(post_params)
             redirect_to action: "index"
           else
             render :edit
@@ -51,6 +62,6 @@ class UserController < ApplicationController
 
 
     def post_params
-      params.permit(:name)
+      params.permit(:name,:email)
     end
 end

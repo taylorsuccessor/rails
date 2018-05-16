@@ -31,3 +31,5 @@
 
 en:
   hello: "Hello world"
+  last_name: "Last name"
+  language: "Language"
